@@ -12,6 +12,9 @@
    Leave the strings empty and the gradient hero stays exactly
    as it looks now. Nothing loads on phones or slow connections.
    ═══════════════════════════════════════════════════════════ */
+window.DUE_EAST_SECTION = {
+  charters: "charters.mp4"   /* plays behind the Charters section, heavily dimmed */
+};
 window.DUE_EAST_PLATES = {
   sandbar: "banks.mp4",   /* the flats plate, after The Crossing */
   chef:    ""    /* e.g. "rawbar.mp4" — the plate after A Day              */
@@ -230,8 +233,16 @@ em{font-style:italic;color:var(--flats)}
 
 /* ── sections ── */
 .band{padding:clamp(76px,15vw,210px) 0;position:relative}
+.band--film{overflow:hidden;isolation:isolate}
+.band-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+  opacity:0;transition:opacity 1.6s var(--ease);pointer-events:none}
+.band-video.on{opacity:1}
+.band-scrim{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,#03111F 0%,rgba(3,17,31,.90) 16%,rgba(3,17,31,.86) 50%,rgba(3,17,31,.92) 86%,#03111F 100%)}
+.band--film .wrap{position:relative;z-index:1}
 .band--hair{border-top:1px solid var(--rule)}
-.head{max-width:24ch;margin-bottom:clamp(44px,8vw,110px)}
+.head{margin-bottom:clamp(44px,8vw,110px)}
+.head h2{max-width:15ch}
 .head .lede{margin-top:26px}
 
 .figs{display:grid;gap:clamp(44px,7vw,90px)}
@@ -594,7 +605,9 @@ em{font-style:italic;color:var(--flats)}
 </section>
 
 <!-- CHARTERS -->
-<section class="band band--hair" id="charters">
+<section class="band band--hair band--film" id="charters">
+  <video class="band-video" data-band="charters" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  <div class="band-scrim"></div>
   <div class="wrap">
     <div class="head fx">
       <p class="eyebrow">Charters</p>
@@ -873,14 +886,15 @@ em{font-style:italic;color:var(--flats)}
   /* Plate videos. Lazy — nothing downloads until the plate is close to view. */
   try{
     var pcfg = window.DUE_EAST_PLATES || {};
-    var plates = document.querySelectorAll('.plate-video');
+    var plates = document.querySelectorAll('.plate-video, .band-video');
     if(plates.length && !reduce && !thrifty && 'IntersectionObserver' in window){
       var po = new IntersectionObserver(function(es){
         es.forEach(function(e){
           var pv = e.target;
           if(!e.isIntersecting){ pv.pause(); return; }
           if(!pv.dataset.loaded){
-            var src = pcfg[pv.getAttribute('data-plate')];
+            var key = pv.getAttribute('data-plate') || pv.getAttribute('data-band');
+            var src = (pv.classList.contains('band-video') ? (window.DUE_EAST_SECTION||{}) : pcfg)[key];
             if(!src){ po.unobserve(pv); return; }
             pv.dataset.loaded = '1';
             var so = document.createElement('source');
