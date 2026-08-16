@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#03111F">
+<title>Due East · Private Charters, West Palm Beach to Bimini</title>
+<meta name="description" content="Depart Palm Beach Inlet, cross the Gulf Stream, arrive on the Bimini flats. A private fleet, a private house, and a chef on shore and offshore.">
+<script>
+/* ═══════════════════════════════════════════════════════════
+   HERO VIDEO — put your file names here and it turns itself on.
+   Leave the strings empty and the gradient hero stays exactly
+   as it looks now. Nothing loads on phones or slow connections.
+   ═══════════════════════════════════════════════════════════ */
+window.DUE_EAST_HERO = {
+  mp4:    "",   /* e.g. "media/crossing.mp4"  — 1080p, H.264, silent, under 4MB */
+  webm:   "",   /* optional, smaller; leave blank if you only have the mp4     */
+  poster: ""    /* e.g. "media/crossing.jpg"  — first frame, loads instantly   */
+};
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@200;300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   PHOTOS — replace `none` with url("https://…").
+   Leave as `none` for a graded fallback.
+   ═══════════════════════════════════════════════════════════ */
+:root{
+  --img-hero:     none;   /* crossing the Stream, Florida astern, 07:00 — landscape */
+  --img-viking:   none;   /* Viking cockpit, fish over the rail — portrait */
+  --img-midnight: none;   /* Midnight Express running, quads down — portrait */
+  --img-skis:     none;   /* WaveRunners on the flats — portrait */
+  --img-sandbar:  none;   /* table on the sand, low tide — wide landscape */
+  --img-house:    none;   /* house at dusk, dock in frame — portrait */
+  --img-chef:     none;   /* raw bar on the swim platform — wide landscape */
+}
+
+:root{
+  --abyss:#03111F; --stream:#0E62B4; --flats:#5AC6DA; --bone:#F2EBDE; --brass:#C99A3F;
+  --ink-soft:rgba(242,235,222,.58); --ink-faint:rgba(242,235,222,.32); --rule:rgba(242,235,222,.11);
+  --display:"Instrument Serif",Georgia,serif;
+  --body:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --pad:clamp(20px,6vw,96px);
+  --max:1320px;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --bar:0px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:#03111F;-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:#03111F;color:var(--bone);
+  font-family:var(--body);font-weight:200;font-size:17px;line-height:1.7;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:var(--bar);
+}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* ── opening curtain. display:none by default — only JS can show it, and JS
+   always schedules its removal, so it can never strand the page black. ── */
+.curtain{display:none;position:fixed;inset:0;z-index:110;background:#03111F;
+  place-items:center;opacity:1;transition:opacity .9s cubic-bezier(.16,1,.3,1)}
+.curtain.show{display:grid}
+.curtain.out{opacity:0}
+.curtain-mark{font-family:var(--display);font-size:clamp(28px,7vw,46px);
+  opacity:0;letter-spacing:.44em;padding-left:.44em;
+  transition:opacity .85s cubic-bezier(.16,1,.3,1),letter-spacing 1s cubic-bezier(.16,1,.3,1),padding-left 1s cubic-bezier(.16,1,.3,1)}
+.curtain-mark span{color:var(--flats)}
+.curtain-mark.in{opacity:1;letter-spacing:.07em;padding-left:.07em}
+
+/* ── overlays (decorative only — never hide content) ── */
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.vig{position:fixed;inset:0;z-index:88;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 45%,transparent 44%,rgba(0,0,0,.44) 100%)}
+
+/* ── type ── */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--flats);margin:0 0 26px;line-height:1.7}
+.eyebrow--brass{color:var(--brass)}
+h1,h2,h3{font-family:var(--display);font-weight:400;letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(44px,10.5vw,128px);line-height:.98}
+h2{font-size:clamp(36px,8vw,82px);line-height:1.04}
+h3{font-size:clamp(26px,6vw,40px);line-height:1.12}
+.lede{font-size:clamp(17px,4.4vw,21px);line-height:1.66;color:var(--ink-soft);max-width:50ch;font-weight:200}
+.datum{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);line-height:1.8}
+em{font-style:italic;color:var(--flats)}
+
+/* ── nav ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;
+  gap:14px;padding:18px var(--pad);padding-top:calc(18px + env(safe-area-inset-top));
+  border-bottom:1px solid transparent;
+  transition:padding .5s var(--ease),background .5s var(--ease),border-color .5s var(--ease)}
+.nav.is-stuck{padding-top:calc(11px + env(safe-area-inset-top));padding-bottom:11px;
+  background:rgba(3,17,31,.9);backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
+.mark{font-family:var(--display);font-size:21px;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
+.mark span{color:var(--flats)}
+.nav-links{display:flex;gap:36px}
+.nav-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink-soft);position:relative;padding-bottom:4px;transition:color .4s}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--flats);
+  transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease)}
+.nav-links a:hover{color:var(--bone)}
+.nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  text-decoration:none;padding:13px 24px;border:1px solid rgba(201,154,63,.55);color:var(--brass);
+  background:transparent;cursor:pointer;
+  transition:background .4s var(--ease),color .4s var(--ease),border-color .4s}
+.btn:hover{background:var(--brass);color:#03111F;border-color:var(--brass)}
+.btn--solid{background:var(--brass);color:#03111F;border-color:var(--brass)}
+.btn--solid:hover{background:var(--bone);border-color:var(--bone)}
+
+.burger{display:none;width:46px;height:46px;align-items:center;justify-content:center;
+  background:none;border:0;cursor:pointer;padding:0;margin-right:-10px}
+.burger i{display:block;position:relative;width:22px;height:1px;background:var(--bone);transition:background .3s}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:22px;height:1px;background:var(--bone);transition:transform .45s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.burger.open i{background:transparent}
+.burger.open i::before{transform:translateY(6px) rotate(45deg)}
+.burger.open i::after{transform:translateY(-6px) rotate(-45deg)}
+
+.menu{position:fixed;inset:0;z-index:75;background:rgba(3,17,31,.97);backdrop-filter:blur(18px);
+  display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 var(--pad);
+  opacity:0;visibility:hidden;transition:opacity .45s var(--ease),visibility .45s}
+.menu.open{opacity:1;visibility:visible}
+.menu a{font-family:var(--display);font-size:clamp(30px,9vw,46px);text-decoration:none;padding:14px 0;
+  border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;align-items:baseline}
+.menu a span{font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:var(--flats)}
+.menu-foot{margin-top:40px;display:flex;flex-direction:column;gap:12px}
+.menu-foot a{font-family:var(--mono);font-size:12px;letter-spacing:.14em;border:0;padding:0;color:var(--ink-soft);display:block}
+
+@media(max-width:940px){
+  .nav-links{display:none}
+  .burger{display:flex}
+  .nav .btn{display:none}
+}
+
+/* ── sticky booking bar (mobile) ── */
+.bar{display:none}
+@media(max-width:940px){
+  :root{--bar:calc(66px + env(safe-area-inset-bottom))}
+  .bar{position:fixed;left:0;right:0;bottom:0;z-index:78;display:grid;grid-template-columns:1fr 1.3fr;
+    gap:1px;background:var(--rule);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom)}
+  .bar a{display:flex;align-items:center;justify-content:center;min-height:66px;text-decoration:none;
+    font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;background:#03111F}
+  .bar a:first-child{color:var(--bone)}
+  .bar a:last-child{background:var(--brass);color:#03111F}
+  .menu{padding-bottom:calc(var(--bar) + 20px)}
+}
+
+/* ── depth readout ── */
+.readout{position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:65;
+  display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;
+  transition:opacity .8s var(--ease);pointer-events:none}
+.readout.on{opacity:1}
+.readout-n{font-family:var(--mono);font-size:13px;letter-spacing:.1em;color:var(--flats);font-variant-numeric:tabular-nums}
+.readout-l{font-family:var(--mono);font-size:9px;letter-spacing:.28em;color:var(--ink-faint);writing-mode:vertical-rl}
+.readout-bar{width:1px;height:150px;background:var(--rule);position:relative}
+.readout-fill{position:absolute;top:0;left:0;width:1px;background:var(--flats);height:0;transition:height .25s linear}
+@media(max-width:1180px){.readout{display:none}}
+
+/* ── hero — more colour, weighted right ── */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;
+  background:
+    radial-gradient(90% 60% at 20% 8%,rgba(96,190,224,.20),transparent 62%),
+    radial-gradient(110% 70% at 78% 22%,rgba(16,102,186,.45),transparent 66%),
+    linear-gradient(180deg,#0A4C86 0%,#063356 38%,#03111F 84%)}
+.hero-bg{position:absolute;inset:0;z-index:0;background-image:var(--img-hero);background-size:cover;background-position:center}
+.hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
+  opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
+.hero-video.on{opacity:1}
+.hero-veil{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(3,17,31,.5) 0%,rgba(3,17,31,.12) 32%,rgba(3,17,31,.86) 82%,#03111F 100%)}
+.caustic{position:absolute;inset:-20%;z-index:1;pointer-events:none;filter:blur(60px);opacity:.5}
+.caustic i{position:absolute;border-radius:50%;display:block}
+.caustic i:nth-child(1){width:46vw;height:46vw;left:4%;top:2%;background:radial-gradient(circle,rgba(96,190,224,.30),transparent 68%);animation:drift1 34s ease-in-out infinite}
+.caustic i:nth-child(2){width:56vw;height:56vw;right:2%;top:14%;background:radial-gradient(circle,rgba(16,102,186,.42),transparent 68%);animation:drift2 46s ease-in-out infinite}
+.caustic i:nth-child(3){width:34vw;height:34vw;left:38%;bottom:4%;background:radial-gradient(circle,rgba(201,154,63,.16),transparent 68%);animation:drift1 58s ease-in-out infinite reverse}
+@keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(7%,-5%) scale(1.14)}}
+@keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-8%,6%) scale(1.1)}}
+
+.hero-top{position:relative;z-index:4;max-width:var(--max);margin:0 auto;width:100%;
+  padding:calc(116px + env(safe-area-inset-top)) var(--pad) 0}
+.coords{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.24em;line-height:1.9;
+  color:var(--ink-faint);overflow-wrap:anywhere}
+.hero-copy{position:relative;z-index:4;max-width:var(--max);margin:auto auto 0;width:100%;padding:52px var(--pad) 48px}
+.hero h1{max-width:15ch}
+.hero-sub{display:flex;flex-wrap:wrap;gap:26px 56px;align-items:flex-end;margin-top:36px}
+.hero-sub p{margin:0;max-width:44ch;color:var(--ink-soft)}
+@media(max-width:1240px){.coords{letter-spacing:.14em}}
+@media(max-width:940px){
+  .hero-top{display:none}
+  .hero{min-height:auto;padding-top:96px}
+  .hero-copy{padding:20px var(--pad) 36px}
+  .hero-sub{gap:22px}
+  .hero-sub .btn{width:100%}
+  .caustic{filter:blur(50px)}
+}
+
+/* ── charts ── */
+.chart-hold{position:relative;z-index:3;width:100%}
+.chart{display:block;width:100%;height:auto}
+.chart-v{display:none;max-width:420px;margin:0 auto;padding:0 var(--pad) 44px}
+@media(max-width:940px){
+  .chart-h{display:none}
+  .chart-v{display:block}
+}
+.floor-line{fill:none;stroke:var(--flats);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pin-dot{fill:#03111F;stroke:var(--flats);stroke-width:1.5}
+.pin-label{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.08em;fill:var(--bone)}
+.pin-depth{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.18em;fill:var(--flats)}
+.surface{stroke:rgba(242,235,222,.22);stroke-width:1;stroke-dasharray:1 8}
+.tick{stroke:rgba(242,235,222,.26);stroke-width:1}
+.scale-tag{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.24em;fill:rgba(242,235,222,.38)}
+
+/* ── sections ── */
+.band{padding:clamp(76px,15vw,210px) 0;position:relative}
+.band--hair{border-top:1px solid var(--rule)}
+.head{max-width:24ch;margin-bottom:clamp(44px,8vw,110px)}
+.head .lede{margin-top:26px}
+
+.figs{display:grid;gap:clamp(44px,7vw,90px)}
+@media(min-width:860px){.figs{grid-template-columns:repeat(3,1fr)}}
+.fig-n{font-family:var(--display);font-size:clamp(62px,17vw,124px);line-height:.9;color:var(--flats)}
+.fig-l{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;color:var(--ink-faint);text-transform:uppercase;margin:18px 0 0;padding-top:18px;border-top:1px solid var(--rule)}
+.figs p{margin:14px 0 0;color:var(--ink-soft);max-width:34ch;font-size:16px}
+
+.plate{position:relative;height:clamp(260px,52vh,620px);overflow:hidden;
+  background:linear-gradient(120deg,#063356,#0E62B4 45%,#03111F)}
+.plate-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.plate-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,17,31,.32),rgba(3,17,31,.7))}
+.plate-cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(242,235,222,.62);text-transform:uppercase}
+
+.vessel{display:grid;gap:clamp(28px,5vw,80px);padding:clamp(50px,8vw,120px) 0;border-top:1px solid var(--rule)}
+@media(min-width:900px){
+  .vessel{grid-template-columns:1fr 1fr;align-items:center}
+  .vessel:nth-of-type(even) .vessel-img{order:2}
+}
+.vessel-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(150deg,#0A4C86,#03111F)}
+@media(max-width:899px){.vessel-img{aspect-ratio:4/3}}
+.vessel-img i{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform 1.4s var(--ease)}
+@media(hover:hover){.vessel:hover .vessel-img i{transform:scale(1)}}
+.vessel-img::after{content:attr(data-cap);position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:rgba(242,235,222,.5);text-transform:uppercase}
+.vessel-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:18px}
+.vessel h3{margin-bottom:22px}
+.vessel p{margin:0 0 18px;color:var(--ink-soft);max-width:46ch}
+.spec{margin-top:32px;display:grid;grid-template-columns:auto 1fr}
+.spec div{padding:13px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:12px;letter-spacing:.04em;line-height:1.5}
+.spec .k{color:var(--ink-faint);text-transform:uppercase;font-size:10px;letter-spacing:.2em;padding-right:20px}
+.spec .v{text-align:right}
+
+.charters{display:grid;border-top:1px solid var(--rule)}
+@media(min-width:820px){.charters{grid-template-columns:1fr 1fr;column-gap:clamp(50px,7vw,110px)}}
+.charter{padding:clamp(34px,5vw,64px) 0;border-bottom:1px solid var(--rule)}
+.charter-meta{display:flex;gap:18px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.tag{font-family:var(--mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--flats)}
+.tag--blue{color:#77BEF0}
+.tag--brass{color:var(--brass)}
+.charter h3{max-width:18ch;margin-bottom:20px}
+.charter p{margin:0;color:var(--ink-soft);max-width:44ch}
+.charter .datum{margin-top:20px}
+
+.day{border-top:1px solid var(--rule)}
+.hour{display:grid;gap:6px;padding:24px 0;border-bottom:1px solid var(--rule);transition:padding-left .6s var(--ease)}
+@media(min-width:860px){
+  .hour{grid-template-columns:110px 260px 1fr;gap:50px;align-items:baseline;padding:clamp(26px,3.2vw,40px) 0}
+  .hour:hover{padding-left:18px}
+  .hour p{margin:0}
+}
+.hour-t{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;color:var(--brass)}
+.hour-w{font-family:var(--display);font-size:clamp(23px,6vw,30px);line-height:1.2}
+.hour p{margin:4px 0 0;color:var(--ink-soft);max-width:54ch;font-size:16px}
+
+.shore-grid{display:grid;gap:clamp(40px,7vw,110px)}
+@media(min-width:960px){.shore-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.house-img{position:relative;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,#0A4C86,#03111F)}
+@media(max-width:959px){.house-img{aspect-ratio:4/3}}
+@media(min-width:960px){.house-img{position:sticky;top:110px}}
+.house-img i{position:absolute;inset:0;background-size:cover;background-position:center}
+.house-list{list-style:none;margin:38px 0 0;padding:0;border-top:1px solid var(--rule)}
+.house-list li{padding:16px 0;border-bottom:1px solid var(--rule);display:flex;gap:18px;align-items:baseline;color:var(--ink-soft);font-size:16px}
+.house-list .n{font-family:var(--mono);font-size:10px;color:var(--flats);letter-spacing:.18em;flex:0 0 auto}
+.pull{margin:clamp(48px,7vw,96px) 0 0;padding:0;font-family:var(--display);font-size:clamp(27px,7vw,54px);line-height:1.16;max-width:20ch}
+.pull cite{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint);font-style:normal;margin-top:28px}
+
+.reserve-grid{display:grid;gap:clamp(48px,8vw,110px)}
+@media(min-width:960px){.reserve-grid{grid-template-columns:.8fr 1.2fr}}
+.rate{border-top:1px solid var(--rule);padding:16px 0;display:flex;justify-content:space-between;gap:18px;align-items:baseline;flex-wrap:wrap}
+.rate:last-of-type{border-bottom:1px solid var(--rule)}
+.rate-n{font-family:var(--display);font-size:21px}
+.rate-v{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;color:var(--brass);text-transform:uppercase;text-align:right}
+.field{display:grid;gap:9px;margin-bottom:24px}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint)}
+.field input,.field select,.field textarea{background:transparent;border:0;border-bottom:1px solid var(--rule);
+  color:var(--bone);font-family:var(--body);font-size:16px;font-weight:200;padding:13px 2px;border-radius:0;
+  min-height:46px;transition:border-color .5s var(--ease)}
+.field select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--flats) 50%),linear-gradient(135deg,var(--flats) 50%,transparent 50%);background-position:calc(100% - 14px) 23px,calc(100% - 9px) 23px;background-size:5px 5px;background-repeat:no-repeat;padding-right:34px}
+.field select option{background:#03111F;color:var(--bone)}
+.field textarea{resize:vertical;min-height:100px}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-bottom-color:var(--flats)}
+.two-up{display:grid;gap:24px}
+@media(min-width:640px){.two-up{grid-template-columns:1fr 1fr;gap:24px 40px}}
+.form-note{font-family:var(--mono);font-size:11px;line-height:1.95;color:var(--ink-faint);letter-spacing:.04em;margin:20px 0 0}
+
+.foot{border-top:1px solid var(--rule);padding:64px 0 44px}
+.foot-grid{display:flex;flex-wrap:wrap;gap:34px 70px;justify-content:space-between;align-items:flex-start}
+.foot a{text-decoration:none;color:var(--ink-soft);transition:color .4s;display:inline-block;padding:3px 0}
+.foot a:hover{color:var(--flats)}
+.foot-links{display:flex;flex-direction:column;gap:8px;font-family:var(--mono);font-size:12px;letter-spacing:.1em}
+
+:focus-visible{outline:1px solid var(--flats);outline-offset:5px}
+::selection{background:var(--flats);color:#03111F}
+
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .caustic i{animation:none}
+}
+</style>
+</head>
+<body>
+
+<div class="curtain" id="curtain" aria-hidden="true"><div class="curtain-mark">Due<span>·</span>East</div></div>
+<div class="vig" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<div class="readout" id="readout" aria-hidden="true">
+  <div class="readout-n" id="readoutN">0 ft</div>
+  <div class="readout-bar"><div class="readout-fill" id="readoutFill"></div></div>
+  <div class="readout-l">Depth</div>
+</div>
+
+<nav class="nav" id="nav">
+  <a class="mark" href="#top">Due<span>·</span>East</a>
+  <div class="nav-links">
+    <a href="#crossing">The crossing</a>
+    <a href="#fleet">Fleet</a>
+    <a href="#charters">Charters</a>
+    <a href="#shore">The house</a>
+  </div>
+  <a class="btn" href="#reserve">Check dates</a>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i></button>
+</nav>
+
+<div class="menu" id="menu">
+  <a href="#crossing">The crossing <span>74 NM</span></a>
+  <a href="#fleet">Fleet <span>3 boats</span></a>
+  <a href="#charters">Charters <span>6</span></a>
+  <a href="#shore">The house <span>Sleeps 10</span></a>
+  <a href="#reserve">Check dates <span>→</span></a>
+  <div class="menu-foot">
+    <a href="tel:+15615550174">+1 561 555 0174</a>
+    <a href="mailto:dock@dueeastbimini.com">dock@dueeastbimini.com</a>
+  </div>
+</div>
+
+<div class="bar">
+  <a href="tel:+15615550174">Call</a>
+  <a href="#reserve">Check dates</a>
+</div>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <video class="hero-video" id="heroVideo" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+  <div class="caustic" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="hero-veil"></div>
+
+  <div class="hero-top">
+    <p class="coords fx">DEPART PALM BEACH INLET 26°46′N 80°02′W&nbsp; ·&nbsp; ARRIVE BIMINI 25°44′N 79°15′W&nbsp; ·&nbsp; 74 NM DUE EAST</p>
+  </div>
+
+  <div class="hero-copy">
+    <p class="eyebrow fx">West Palm Beach → Bimini · Private fleet &amp; house</p>
+    <h1 class="fx">Leave Palm Beach at seven. On the sandbar by <em>ten.</em></h1>
+    <div class="hero-sub">
+      <p class="fx">Seventy-four miles due east, across two thousand feet of blue water, onto a flat you can stand up in. Our boats, our house, our chef — one party at a time.</p>
+      <a class="btn btn--solid fx" href="#reserve">Check dates</a>
+    </div>
+  </div>
+
+  <div class="chart-hold fx">
+    <!-- horizontal profile — wide screens -->
+    <svg class="chart chart-h" viewBox="0 0 1200 400" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Depth profile: Palm Beach Inlet east across the Gulf Stream to the Bimini flats</title>
+      <defs>
+        <linearGradient id="waterH" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".18"/>
+          <stop offset="38%" stop-color="#0E62B4" stop-opacity=".42"/>
+          <stop offset="78%" stop-color="#08417C" stop-opacity=".26"/>
+          <stop offset="100%" stop-color="#03111F" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <line class="tick" x1="1" y1="27" x2="1" y2="34"/>
+      <line class="tick" x1="405" y1="27" x2="405" y2="34"/>
+      <line class="tick" x1="810" y1="27" x2="810" y2="34"/>
+      <line class="tick" x1="1199" y1="27" x2="1199" y2="34"/>
+      <text class="scale-tag" x="1" y="18">0 NM</text>
+      <text class="scale-tag" x="405" y="18" text-anchor="middle">25</text>
+      <text class="scale-tag" x="810" y="18" text-anchor="middle">50</text>
+      <text class="scale-tag" x="1199" y="18" text-anchor="end">74 NM</text>
+      <line class="surface" x1="0" y1="34" x2="1200" y2="34"/>
+      <path fill="url(#waterH)" d="M0,52 L52,60 L90,78 C126,120 158,240 198,320 C222,362 244,372 274,377 L648,378 C684,376 704,340 724,262 C740,204 758,168 792,152 C858,140 926,130 998,113 C1046,101 1090,84 1136,70 L1200,56 L1200,400 L0,400 Z"/>
+      <path class="floor-line" d="M0,52 L52,60 L90,78 C126,120 158,240 198,320 C222,362 244,372 274,377 L648,378 C684,376 704,340 724,262 C740,204 758,168 792,152 C858,140 926,130 998,113 C1046,101 1090,84 1136,70 L1200,56"/>
+      <g class="pin">
+        <circle class="pin-dot" cx="46" cy="59" r="3.5"/>
+        <text class="pin-label" x="8" y="100">Palm Beach Inlet</text>
+        <text class="pin-depth" x="8" y="118">DEPART 07:00</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="420" cy="378" r="3.5"/>
+        <text class="pin-label" x="420" y="342" text-anchor="middle">Gulf Stream</text>
+        <text class="pin-depth" x="420" y="360" text-anchor="middle">2,000 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="716" cy="290" r="3.5"/>
+        <text class="pin-label" x="694" y="286" text-anchor="end">The wall</text>
+        <text class="pin-depth" x="694" y="304" text-anchor="end">600 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="998" cy="113" r="3.5"/>
+        <text class="pin-label" x="998" y="150" text-anchor="middle">Sapona wreck</text>
+        <text class="pin-depth" x="998" y="168" text-anchor="middle">15 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="1180" cy="59" r="3.5"/>
+        <text class="pin-label" x="1196" y="96" text-anchor="end">The sandbar</text>
+        <text class="pin-depth" x="1196" y="114" text-anchor="end">2 FT</text>
+      </g>
+    </svg>
+
+    <!-- vertical profile — phones -->
+    <svg class="chart chart-v" viewBox="0 0 340 660" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Depth profile, read downward: Palm Beach Inlet, the Gulf Stream at 2,000 ft, the wall, the Sapona wreck, and the Bimini sandbar</title>
+      <defs>
+        <linearGradient id="waterV" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".16"/>
+          <stop offset="45%" stop-color="#0E62B4" stop-opacity=".40"/>
+          <stop offset="100%" stop-color="#08417C" stop-opacity=".10"/>
+        </linearGradient>
+      </defs>
+      <text class="scale-tag" x="30" y="14" text-anchor="middle">0</text>
+      <text class="scale-tag" x="306" y="14" text-anchor="end">2,000 FT</text>
+      <line class="surface" x1="30" y1="24" x2="306" y2="24"/>
+      <line class="tick" x1="30" y1="20" x2="30" y2="28"/>
+      <line class="tick" x1="306" y1="20" x2="306" y2="28"/>
+      <path fill="url(#waterV)" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616 L30,616 L30,44 Z"/>
+      <path class="floor-line" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616"/>
+      <g class="pin">
+        <circle class="pin-dot" cx="44" cy="44" r="4"/>
+        <text class="pin-label" x="62" y="40">Palm Beach Inlet</text>
+        <text class="pin-depth" x="62" y="57">DEPART · 0 NM</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="306" cy="250" r="4"/>
+        <text class="pin-label" x="288" y="245" text-anchor="end">Gulf Stream</text>
+        <text class="pin-depth" x="288" y="262" text-anchor="end">2,000 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="196" cy="437" r="4"/>
+        <text class="pin-label" x="214" y="433">The wall</text>
+        <text class="pin-depth" x="214" y="450">600 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="92" cy="528" r="4"/>
+        <text class="pin-label" x="110" y="524">Sapona wreck</text>
+        <text class="pin-depth" x="110" y="541">15 FT</text>
+      </g>
+      <g class="pin">
+        <circle class="pin-dot" cx="46" cy="616" r="4"/>
+        <text class="pin-label" x="64" y="612">The sandbar</text>
+        <text class="pin-depth" x="64" y="629">2 FT · 74 NM</text>
+      </g>
+    </svg>
+  </div>
+</header>
+
+<!-- CROSSING -->
+<section class="band band--hair" id="crossing">
+  <div class="wrap">
+    <div class="head fx">
+      <p class="eyebrow">The crossing</p>
+      <h2>The trip starts at the inlet</h2>
+      <p class="lede">Most operators meet you in Bimini and leave the hard part to you. We don't. You board in West Palm, and the crossing is the first good thing that happens.</p>
+    </div>
+    <div class="figs">
+      <div class="fx">
+        <div class="fig-n">74</div>
+        <p class="fig-l">Nautical miles, due east</p>
+        <p>Palm Beach Inlet to Bimini Harbour. We watch the window for days ahead of you and will move a departure sooner than run you into a north wind.</p>
+      </div>
+      <div class="fx">
+        <div class="fig-n">2:15</div>
+        <p class="fig-l">Aboard the Midnight Express</p>
+        <p>Quads, shade, cold drinks, a flat ride in decent conditions. Bags go aboard the night before, so you step on at seven with coffee in your hand and nothing else.</p>
+      </div>
+      <div class="fx">
+        <div class="fig-n">25</div>
+        <p class="fig-l">Minutes, if you'd rather fly</p>
+        <p>Charter from PBI into South Bimini and we'll have the cart at the strip. Good for anyone joining a day late, or who'd rather not do the water twice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="plate">
+  <div class="plate-img" style="background-image:var(--img-sandbar)"></div>
+  <div class="plate-veil"></div>
+  <div class="plate-cap">Low tide · the flat · 15:30</div>
+</div>
+
+<!-- FLEET -->
+<section class="band" id="fleet">
+  <div class="wrap">
+    <div class="head fx">
+      <p class="eyebrow">The fleet</p>
+      <h2>Three ways off the dock</h2>
+      <p class="lede">Every boat is ours and every captain is ours. No pooled charters, no shared cockpit, no stranger in the next chair.</p>
+    </div>
+
+    <article class="vessel fx">
+      <div class="vessel-img" data-cap="Viking 58 · the cockpit"><i style="background-image:var(--img-viking)"></i></div>
+      <div>
+        <span class="vessel-role">Offshore · Sportfish</span>
+        <h3>Viking 58 Convertible</h3>
+        <p>Tower, fighting chair, and a full spread for marlin, tuna, wahoo and mahi. From the Bimini slip the wall is twenty minutes, so lines are in before most crews have cleared the cut — and on the crossing itself we'll pull baits the whole way if you want to fish your way over.</p>
+        <p>Fish are cleaned at the dock and walked straight to the chef.</p>
+        <div class="spec">
+          <div class="k">Length</div><div class="v">58 ft</div>
+          <div class="k">Beam</div><div class="v">17 ft 9 in</div>
+          <div class="k">Cockpit</div><div class="v">165 sq ft</div>
+          <div class="k">Guests</div><div class="v">6 fishing</div>
+          <div class="k">Crew</div><div class="v">Captain + mate</div>
+          <div class="k">Below</div><div class="v">3 staterooms · 2 heads</div>
+          <div class="k">Range</div><div class="v">Gulf Stream · Cat Cay · Isaacs</div>
+          <div class="k">Targets</div><div class="v">Marlin · Tuna · Wahoo · Mahi</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vessel fx">
+      <div class="vessel-img" data-cap="Midnight Express 43 · running east"><i style="background-image:var(--img-midnight)"></i></div>
+      <div>
+        <span class="vessel-role">Crossing · Cruising · Snorkel</span>
+        <h3>Midnight Express 43</h3>
+        <p>Quad outboards, shade over the whole cockpit, sound system and a cooler in the console. This is the boat that brings you over from West Palm, then spends the week on sunrise runs, sandbar afternoons and the hop to Honeymoon Harbour.</p>
+        <p>Shallow enough for the flats, quick enough to make Cat Cay for lunch.</p>
+        <div class="spec">
+          <div class="k">Length</div><div class="v">43 ft</div>
+          <div class="k">Guests</div><div class="v">12</div>
+          <div class="k">Crew</div><div class="v">Captain + host</div>
+          <div class="k">Aboard</div><div class="v">Shade · Sound · Head · Shower</div>
+          <div class="k">Crossing</div><div class="v">2 hrs 15 · weather dependent</div>
+        </div>
+      </div>
+    </article>
+
+    <article class="vessel fx">
+      <div class="vessel-img" data-cap="Three skis · house dock"><i style="background-image:var(--img-skis)"></i></div>
+      <div>
+        <span class="vessel-role">Flats · Free time</span>
+        <h3>The WaveRunners</h3>
+        <p>Three skis kept fueled at the house dock. Take them across the flats on your own, or run them behind the Midnight Express to a cay and swim ashore. Guided safaris to the Bimini Road and the mangrove creeks on request.</p>
+        <p>Vests, dry bags and a short briefing before anyone leaves the dock.</p>
+        <div class="spec">
+          <div class="k">Units</div><div class="v">3 · 3-seat</div>
+          <div class="k">Riders</div><div class="v">Up to 6</div>
+          <div class="k">Access</div><div class="v">Included with the house</div>
+          <div class="k">Guided</div><div class="v">Bimini Road · Mangrove creeks</div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- CHARTERS -->
+<section class="band band--hair" id="charters">
+  <div class="wrap">
+    <div class="head fx">
+      <p class="eyebrow">Charters</p>
+      <h2>Pick a depth</h2>
+      <p class="lede">Every charter below is private and priced by the day, not by the head. Mix them however you like — most guests do two in a day.</p>
+    </div>
+    <div class="charters">
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag tag--blue">2,000 ft</span><span class="tag tag--brass">Full day · 8 hrs</span></div>
+        <h3>Offshore, on the wall</h3>
+        <p>Out at first light for the drop-off. Trolling the edge for wahoo and mahi in winter, marlin and tuna when the water warms. The mate rigs everything; you fish or you watch. Lunch aboard, cold and proper, not sandwiches in foil.</p>
+        <p class="datum">Viking 58 · 6 anglers</p>
+      </article>
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag tag--blue">74 nm</span><span class="tag tag--brass">Crossing day</span></div>
+        <h3>Fish your way over</h3>
+        <p>Leave the inlet with lines out and cross trolling. Mahi under every weed line in spring, wahoo along the edge in winter. You clear customs in Alice Town with fish in the box and dinner already decided.</p>
+        <p class="datum">Viking 58 · West Palm departure</p>
+      </article>
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag">15 ft</span><span class="tag tag--brass">Half day · 4 hrs</span></div>
+        <h3>The Sapona and the road</h3>
+        <p>Snorkel the concrete ship that's sat half out of the water since the 1926 hurricane — bright, shallow, full of fish, easy for first-timers. Then the Bimini Road, the flat stone slabs on the bottom people have argued about for fifty years.</p>
+        <p class="datum">Midnight Express · gear aboard</p>
+      </article>
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag">2 ft</span><span class="tag tag--brass">Half day · 5 hrs</span></div>
+        <h3>Sandbar and Honeymoon Harbour</h3>
+        <p>Nose in on the flat at low tide, drop the ladder, and stand in water the colour of a pool. Stingrays come to you at Honeymoon Harbour. Chef sets a table on the sand — conch salad cut in front of you, cracked ice, cold rosé.</p>
+        <p class="datum">Midnight Express · up to 12</p>
+      </article>
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag">Sunrise</span><span class="tag tag--brass">2 hrs · 06:00</span></div>
+        <h3>The early run</h3>
+        <p>Coffee and warm bread aboard, out through the cut while the island is still asleep, back before breakfast. Quiet water, no other boats, and the best light of the day for anyone with a camera.</p>
+        <p class="datum">Midnight Express · up to 8</p>
+      </article>
+      <article class="charter fx">
+        <div class="charter-meta"><span class="tag">Sunset</span><span class="tag tag--brass">3 hrs · 17:30</span></div>
+        <h3>Last light, west side</h3>
+        <p>Bimini faces due west, so the sun goes down over open water with nothing in the way — and you're looking back at where you came from. Chef comes aboard: raw bar, grilled catch from the morning, champagne on ice.</p>
+        <p class="datum">Midnight Express · chef aboard</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- DAY -->
+<section class="band" id="day">
+  <div class="wrap">
+    <div class="head fx">
+      <p class="eyebrow">Sunrise to last light</p>
+      <h2>How a Tuesday goes</h2>
+      <p class="lede">Nothing here is fixed. But this is the shape of a good day once you're on the island, and it's the one most guests end up repeating.</p>
+    </div>
+    <div class="day">
+      <div class="hour fx"><div class="hour-t">05:40</div><div class="hour-w">Coffee on the dock</div><p>The mate is already loading ice. Chef sends out espresso and something warm while the Viking warms up.</p></div>
+      <div class="hour fx"><div class="hour-t">06:20</div><div class="hour-w">Lines in</div><p>Twenty minutes to the edge. First strike usually comes before anyone has finished a second cup.</p></div>
+      <div class="hour fx"><div class="hour-t">12:15</div><div class="hour-w">Back in, fish out</div><p>Whatever came over the rail is cleaned at the dock and in the kitchen by half past.</p></div>
+      <div class="hour fx"><div class="hour-t">13:00</div><div class="hour-w">Lunch at the house</div><p>Ceviche from the morning's catch, poolside, feet up. Skis are fueled if anyone can't sit still.</p></div>
+      <div class="hour fx"><div class="hour-t">15:30</div><div class="hour-w">Sandbar</div><p>Low tide. The Midnight Express noses onto the flat, the table goes up on the sand, the conch gets cut.</p></div>
+      <div class="hour fx"><div class="hour-t">18:40</div><div class="hour-w">West side, engines off</div><p>Drifting the cut for sunset with Florida somewhere out past the bow. Raw bar out, glasses full, phones mostly down.</p></div>
+      <div class="hour fx"><div class="hour-t">20:15</div><div class="hour-w">Chef's table</div><p>Dinner ashore under the sea grape trees. Your wahoo, over coals, with everything else he's been working on since four.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="plate">
+  <div class="plate-img" style="background-image:var(--img-chef)"></div>
+  <div class="plate-veil"></div>
+  <div class="plate-cap">Raw bar · swim platform · 18:40</div>
+</div>
+
+<!-- SHORE -->
+<section class="band" id="shore">
+  <div class="wrap">
+    <div class="shore-grid">
+      <div class="house-img fx"><i style="background-image:var(--img-house)"></i></div>
+      <div>
+        <div class="fx">
+          <p class="eyebrow">The house</p>
+          <h2>The retreat</h2>
+          <p class="lede" style="margin-top:26px">A private house on the water with its own dock, so the fleet is thirty steps from where you sleep. You take the whole property — we don't split it, and you won't meet another party while you're on it.</p>
+        </div>
+        <ul class="house-list fx">
+          <li><span class="n">01</span><span>Sleeps 10 across five rooms, each with its own bath</span></li>
+          <li><span class="n">02</span><span>Private dock for the Viking, the Midnight Express and the skis</span></li>
+          <li><span class="n">03</span><span>Pool, outdoor shower, shaded dining for twelve</span></li>
+          <li><span class="n">04</span><span>Chef and house manager on property, daily housekeeping</span></li>
+          <li><span class="n">05</span><span>Golf cart for the island, airstrip and ferry pickups included</span></li>
+          <li><span class="n">06</span><span>Rods, reels, vests, snorkel gear and coolers already here</span></li>
+        </ul>
+        <div class="fx" style="margin-top:clamp(48px,7vw,90px)">
+          <p class="eyebrow eyebrow--brass">The kitchen</p>
+          <h3>A chef on shore and a chef offshore</h3>
+          <p style="color:var(--ink-soft);margin-top:22px;max-width:46ch">Breakfast before the boats, lunch wherever you happen to be floating, dinner at the house. Menus are built around what you catch and what came in on the mail boat that morning — hogfish, conch, spiny lobster in season, tuna within hours of the gaff.</p>
+          <p style="color:var(--ink-soft);max-width:46ch">Offshore service travels: raw bar on the sandbar, ceviche cut on the swim platform, grilled catch served on a beach nobody else is standing on. Tell us your restrictions once and you won't have to say it again.</p>
+        </div>
+        <blockquote class="pull fx">Sashimi from a fish that was in the Gulf Stream ninety minutes earlier, eaten standing in the water.<cite>What we do best</cite></blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section class="band band--hair" id="reserve">
+  <div class="wrap">
+    <div class="reserve-grid">
+      <div class="fx">
+        <p class="eyebrow">Reserve</p>
+        <h2>Check your dates</h2>
+        <p class="lede" style="margin-top:26px">One party at a time, so the calendar goes early — especially March through July. Tell us who's coming and what you want out of the trip and we'll come back with a plan and a number the same day.</p>
+        <div style="margin-top:44px">
+          <div class="rate"><span class="rate-n">The house, per night</span><span class="rate-v">Rates on request</span></div>
+          <div class="rate"><span class="rate-n">Crossing from West Palm</span><span class="rate-v">Included · house guests</span></div>
+          <div class="rate"><span class="rate-n">Offshore day, Viking</span><span class="rate-v">Per day · 8 hrs</span></div>
+          <div class="rate"><span class="rate-n">Cruise or snorkel</span><span class="rate-v">Half or full day</span></div>
+          <div class="rate"><span class="rate-n">Chef &amp; WaveRunners</span><span class="rate-v">Included · house guests</span></div>
+        </div>
+        <p class="form-note">
+          Booked as a whole-property week or a three-night minimum.<br>
+          Fuel, dockage, gratuity and Bahamas fishing permit quoted with your itinerary.<br>
+          Passports required. We file the customs paperwork and clear you in at Alice Town.<br>
+          Departures from Palm Beach Inlet; Fort Lauderdale on request.
+        </p>
+      </div>
+      <div class="fx">
+        <div class="two-up">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name" placeholder="Your name"></div>
+          <div class="field"><label for="f-email">Email</label><input id="f-email" type="email" inputmode="email" autocomplete="email" placeholder="you@email.com"></div>
+          <div class="field"><label for="f-phone">Phone</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Mobile"></div>
+          <div class="field"><label for="f-guests">Party size</label><input id="f-guests" type="number" inputmode="numeric" min="1" max="20" placeholder="How many"></div>
+          <div class="field"><label for="f-from">Arriving</label><input id="f-from" type="date"></div>
+          <div class="field"><label for="f-to">Leaving</label><input id="f-to" type="date"></div>
+        </div>
+        <div class="field">
+          <label for="f-cross">Getting over</label>
+          <select id="f-cross">
+            <option>Cross with you from West Palm</option>
+            <option>Fish our way over on the Viking</option>
+            <option>Fly into South Bimini</option>
+            <option>Not sure yet — advise us</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-what">What you're after</label>
+          <select id="f-what">
+            <option>The house and the whole fleet</option>
+            <option>Offshore fishing, Viking</option>
+            <option>Cruising and sandbar days</option>
+            <option>Sunrise or sunset cruise</option>
+            <option>Snorkel — Sapona and Bimini Road</option>
+            <option>Something else entirely</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-notes">Anything we should know</label>
+          <textarea id="f-notes" placeholder="Occasion, kids aboard, allergies, who fishes and who doesn't"></textarea>
+        </div>
+        <button class="btn btn--solid" id="send" type="button" style="width:100%;padding:18px">Send the inquiry</button>
+        <p class="form-note" id="status" role="status">Opens your mail app with everything filled in. Prefer to talk? Call the number below.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="mark" style="font-size:28px">Due<span style="color:var(--flats)">·</span>East</div>
+      <p class="datum" style="margin-top:14px">Departing West Palm Beach<br>Private charters &amp; retreat · Bimini, Bahamas</p>
+    </div>
+    <div class="foot-links">
+      <a href="tel:+15615550174">+1 561 555 0174</a>
+      <a href="mailto:dock@dueeastbimini.com">dock@dueeastbimini.com</a>
+      <a href="https://wa.me/15615550174">WhatsApp</a>
+      <a href="#">Instagram</a>
+    </div>
+    <div class="foot-links">
+      <a href="#crossing">The crossing</a>
+      <a href="#fleet">Fleet</a>
+      <a href="#charters">Charters</a>
+      <a href="#reserve">Check dates</a>
+    </div>
+    <p class="datum" style="max-width:26ch">Licensed and insured in Florida and the Commonwealth of The Bahamas. © 2026</p>
+  </div>
+</footer>
+
+<script>
+/* Nothing in the CSS hides content. Only this script hides — and it hides an
+   element and schedules its reveal in the same breath. If the script never runs,
+   the page is simply static and fully visible. */
+(function(){
+  var reduce = false;
+  try{ reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+
+  var els = [];
+  try{ els = Array.prototype.slice.call(document.querySelectorAll('.fx')); }catch(e){}
+
+  /* Opening. Shown only by JS; removed by JS on three independent timers. */
+  var lead = 120;
+  var curtain = document.getElementById('curtain');
+  function dropCurtain(){
+    var c = document.getElementById('curtain');
+    if(c && c.parentNode) c.parentNode.removeChild(c);
+  }
+  if(curtain && !reduce){
+    lead = 1450;
+    curtain.classList.add('show');
+    var cmark = curtain.querySelector('.curtain-mark');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ if(cmark) cmark.classList.add('in'); });
+    });
+    setTimeout(function(){ curtain.classList.add('out'); }, 1350);
+    setTimeout(dropCurtain, 2500);
+    setTimeout(dropCurtain, 4200);
+    window.addEventListener('error', dropCurtain);
+  }
+
+  /* Hero video. Only loads on a wide screen, with motion allowed and no
+     data-saver flag. Pauses when off-screen or the tab is hidden. If the file
+     is missing or fails, the gradient hero is simply never covered. */
+  try{
+    var v = document.getElementById('heroVideo');
+    var cfg = window.DUE_EAST_HERO || {};
+    var narrow = false;
+    try{ narrow = window.matchMedia('(max-width: 940px)').matches; }catch(e){}
+    var thrifty = false;
+    try{
+      var c = navigator.connection;
+      thrifty = !!(c && (c.saveData || /(^|-)2g$/.test(c.effectiveType || '')));
+    }catch(e){}
+
+    if(v && cfg.poster) v.setAttribute('poster', cfg.poster);
+
+    if(v && cfg.mp4 && !narrow && !reduce && !thrifty){
+      if(cfg.webm){
+        var sw = document.createElement('source');
+        sw.src = cfg.webm; sw.type = 'video/webm';
+        v.appendChild(sw);
+      }
+      var sm = document.createElement('source');
+      sm.src = cfg.mp4; sm.type = 'video/mp4';
+      v.appendChild(sm);
+
+      v.addEventListener('playing', function(){ v.classList.add('on'); });
+      v.addEventListener('error', function(){ v.classList.remove('on'); });
+
+      v.load();
+      var attempt = v.play();
+      if(attempt && attempt.catch) attempt.catch(function(){ /* autoplay refused — gradient stays */ });
+
+      document.addEventListener('visibilitychange', function(){
+        if(document.hidden) v.pause();
+        else { var a = v.play(); if(a && a.catch) a.catch(function(){}); }
+      });
+
+      if('IntersectionObserver' in window){
+        var vo = new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            if(e.isIntersecting){ var a = v.play(); if(a && a.catch) a.catch(function(){}); }
+            else v.pause();
+          });
+        },{threshold:.01});
+        vo.observe(v);
+      }
+    }
+  }catch(e){}
+
+  function reveal(el){
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  }
+
+  if(!reduce && els.length && 'IntersectionObserver' in window){
+    els.forEach(function(el){
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(26px)';
+      el.style.transition = 'opacity .95s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1)';
+    });
+    // Anything already on screen comes in on a short stagger.
+    var vh = window.innerHeight;
+    var staggered = 0;
+    els.forEach(function(el){
+      var top = el.getBoundingClientRect().top;
+      if(top < vh){
+        setTimeout(reveal.bind(null, el), lead + (staggered++ * 110));
+      }
+    });
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); }
+      });
+    },{threshold:.08, rootMargin:'0px 0px -50px 0px'});
+    els.forEach(function(el){ io.observe(el); });
+    // Hard backstop.
+    setTimeout(function(){ els.forEach(reveal); }, 5000);
+    window.addEventListener('error', function(){ els.forEach(reveal); });
+  }
+
+  // Draw the seafloor line with a transition, not an animation.
+  if(!reduce){
+    try{
+      document.querySelectorAll('.floor-line').forEach(function(p){
+        var len = p.getTotalLength();
+        if(!len) return;
+        p.style.strokeDasharray = len;
+        p.style.strokeDashoffset = len;
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            p.style.transition = 'stroke-dashoffset 2.4s cubic-bezier(.16,1,.3,1) ' + ((lead + 250) / 1000) + 's';
+            p.style.strokeDashoffset = '0';
+          });
+        });
+        setTimeout(function(){ p.style.strokeDashoffset = '0'; }, lead + 3400);
+      });
+    }catch(e){}
+  }
+
+  // menu
+  var burger = document.getElementById('burger');
+  var menu = document.getElementById('menu');
+  function setMenu(open){
+    if(!menu || !burger) return;
+    menu.classList.toggle('open', open);
+    burger.classList.toggle('open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+  if(burger) burger.addEventListener('click', function(){ setMenu(!menu.classList.contains('open')); });
+  if(menu) menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setMenu(false); });
+
+  // nav + depth readout
+  try{
+    var nav = document.getElementById('nav');
+    var readout = document.getElementById('readout');
+    var readoutN = document.getElementById('readoutN');
+    var readoutFill = document.getElementById('readoutFill');
+    var ticking = false;
+    function frame(){
+      var y = window.scrollY || window.pageYOffset || 0;
+      var docH = document.body.scrollHeight - window.innerHeight;
+      var pct = docH > 0 ? Math.min(y / docH, 1) : 0;
+      nav.classList.toggle('is-stuck', y > 60);
+      readout.classList.toggle('on', y > 140);
+      readoutN.textContent = (Math.round(pct * 2000 / 10) * 10).toLocaleString() + ' ft';
+      readoutFill.style.height = (pct * 100) + '%';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ requestAnimationFrame(frame); ticking = true; }
+    }, {passive:true});
+    frame();
+  }catch(e){}
+
+  var send = document.getElementById('send');
+  if(send) send.addEventListener('click', function(){
+    var v = function(id){ var el = document.getElementById(id); return el ? (el.value||'').trim() : ''; };
+    var name = v('f-name'), email = v('f-email');
+    var status = document.getElementById('status');
+    if(!name || !email){
+      status.textContent = 'Add your name and email so we can reply.';
+      status.style.color = '#C99A3F';
+      (!name ? document.getElementById('f-name') : document.getElementById('f-email')).focus();
+      return;
+    }
+    var lines = ['Name: '+name,'Email: '+email,'Phone: '+(v('f-phone')||'—'),
+      'Party size: '+(v('f-guests')||'—'),'Arriving: '+(v('f-from')||'—'),'Leaving: '+(v('f-to')||'—'),
+      'Getting over: '+v('f-cross'),'Interested in: '+v('f-what'),'','Notes:',v('f-notes')||'—'].join('\n');
+    window.location.href = 'mailto:dock@dueeastbimini.com?subject='
+      + encodeURIComponent('Charter inquiry — '+name) + '&body=' + encodeURIComponent(lines);
+    status.textContent = 'Your mail app should be opening. If it does not, email dock@dueeastbimini.com.';
+    status.style.color = '#5AC6DA';
+  });
+})();
+</script>
+</body>
+</html>
