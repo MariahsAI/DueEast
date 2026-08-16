@@ -43,7 +43,7 @@ window.DUE_EAST_HERO = {
   --body:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --pad:clamp(20px,6vw,96px);
-  --max:1320px;
+  --max:1560px;
   --ease:cubic-bezier(.16,1,.3,1);
   --bar:0px;
 }
@@ -56,7 +56,7 @@ body{
   -webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:var(--bar);
 }
 a{color:inherit}
-.wrap{max-width:var(--max);margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+.wrap{max-width:var(--max);margin:0;padding-left:var(--pad);padding-right:var(--pad)}
 
 /* ── opening curtain. display:none by default — only JS can show it, and JS
    always schedules its removal, so it can never strand the page black. ── */
@@ -92,13 +92,14 @@ em{font-style:italic;color:var(--flats)}
   padding:18px var(--pad);padding-top:calc(18px + env(safe-area-inset-top));
   border-bottom:1px solid transparent;
   transition:padding .5s var(--ease),background .5s var(--ease),border-color .5s var(--ease)}
-.nav-inner{max-width:var(--max);margin:0 auto;width:100%;
-  display:flex;align-items:center;justify-content:space-between;gap:14px}
+.nav-inner{max-width:var(--max);margin:0;width:100%;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:14px}
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 .nav.is-stuck{padding-top:calc(11px + env(safe-area-inset-top));padding-bottom:11px;
   background:rgba(3,17,31,.9);backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
 .mark{font-family:var(--display);font-size:21px;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
 .mark span{color:var(--flats)}
-.nav-links{display:flex;gap:36px}
+.nav-links{display:flex;gap:36px;justify-content:center}
 .nav-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
   text-decoration:none;color:var(--ink-soft);position:relative;padding-bottom:4px;transition:color .4s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--flats);
@@ -189,18 +190,18 @@ em{font-style:italic;color:var(--flats)}
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(7%,-5%) scale(1.14)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-8%,6%) scale(1.1)}}
 
-.hero-top{position:relative;z-index:4;max-width:var(--max);margin:0 auto;width:100%;
+.hero-top{position:relative;z-index:4;max-width:var(--max);margin:0;width:100%;
   padding:calc(116px + env(safe-area-inset-top)) var(--pad) 0}
 .coords{margin:0;font-family:var(--mono);font-size:10px;letter-spacing:.24em;line-height:1.9;
-  color:var(--ink-faint);overflow-wrap:anywhere}
-.hero-copy{position:relative;z-index:4;max-width:var(--max);margin:auto auto 0;width:100%;padding:52px var(--pad) 48px}
+  color:rgba(242,235,222,.56);overflow-wrap:anywhere}
+.hero-copy{position:relative;z-index:4;max-width:var(--max);margin:auto 0 0;width:100%;padding:52px var(--pad) 48px}
 .hero h1{max-width:15ch}
 .hero-sub{display:flex;flex-wrap:wrap;gap:26px 56px;align-items:flex-end;margin-top:36px}
 .hero-sub p{margin:0;max-width:44ch;color:var(--ink-soft)}
 @media(max-width:1240px){.coords{letter-spacing:.14em}}
 @media(max-width:940px){
   .hero-top{display:none}
-  .hero{min-height:auto;padding-top:96px}
+  .hero{min-height:82svh;padding-top:96px}
   .hero-copy{padding:20px var(--pad) 36px}
   .hero-sub{gap:22px}
   .hero-sub .btn{width:100%}
@@ -239,7 +240,7 @@ em{font-style:italic;color:var(--flats)}
   background:linear-gradient(120deg,#063356,#0E62B4 45%,#03111F)}
 .plate-img{position:absolute;inset:0;background-size:cover;background-position:center}
 .plate-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,17,31,.32),rgba(3,17,31,.7))}
-.plate-cap{position:absolute;left:max(var(--pad),calc((100% - var(--max))/2 + var(--pad)));bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(242,235,222,.62);text-transform:uppercase}
+.plate-cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(242,235,222,.62);text-transform:uppercase}
 
 .vessel{display:grid;gap:clamp(28px,5vw,80px);padding:clamp(50px,8vw,120px) 0;border-top:1px solid var(--rule)}
 @media(min-width:900px){
@@ -348,8 +349,10 @@ em{font-style:italic;color:var(--flats)}
     <a href="#charters">Charters</a>
     <a href="#shore">The house</a>
   </div>
-  <a class="btn" href="#reserve">Check dates</a>
-  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i></button>
+  <div class="nav-right">
+    <a class="btn" href="#reserve">Check dates</a>
+    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i></button>
+  </div>
  </div>
 </nav>
 
@@ -810,8 +813,6 @@ em{font-style:italic;color:var(--flats)}
   try{
     var v = document.getElementById('heroVideo');
     var cfg = window.DUE_EAST_HERO || {};
-    var narrow = false;
-    try{ narrow = window.matchMedia('(max-width: 940px)').matches; }catch(e){}
     var thrifty = false;
     try{
       var c = navigator.connection;
@@ -820,7 +821,7 @@ em{font-style:italic;color:var(--flats)}
 
     if(v && cfg.poster) v.setAttribute('poster', cfg.poster);
 
-    if(v && cfg.mp4 && !narrow && !reduce && !thrifty){
+    if(v && cfg.mp4 && !reduce && !thrifty){
       if(cfg.webm){
         var sw = document.createElement('source');
         sw.src = cfg.webm; sw.type = 'video/webm';
