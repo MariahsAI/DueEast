@@ -12,6 +12,11 @@
    Leave the strings empty and the gradient hero stays exactly
    as it looks now. Nothing loads on phones or slow connections.
    ═══════════════════════════════════════════════════════════ */
+window.DUE_EAST_FLEET = {
+  viking:   "",   /* video in the Viking frame — portrait crops best  */
+  midnight: "midnight.mp4",   /* video in the Midnight Express frame   */
+  skis:     ""    /* video in the WaveRunner frame                    */
+};
 window.DUE_EAST_SECTION = {
   charters: "charters.mp4"   /* plays behind the Charters section, heavily dimmed */
 };
@@ -268,6 +273,9 @@ em{font-style:italic;color:var(--flats)}
 .vessel-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(150deg,#0A4C86,#03111F)}
 @media(max-width:899px){.vessel-img{aspect-ratio:4/3}}
 .vessel-img i{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform 1.4s var(--ease)}
+.vessel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
+.vessel-video.on{opacity:1}
 @media(hover:hover){.vessel:hover .vessel-img i{transform:scale(1)}}
 .vessel-img::after{content:attr(data-cap);position:absolute;left:18px;bottom:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.24em;color:rgba(242,235,222,.5);text-transform:uppercase}
 .vessel-role{font-family:var(--mono);font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--brass);display:block;margin-bottom:18px}
@@ -550,7 +558,7 @@ em{font-style:italic;color:var(--flats)}
     </div>
 
     <article class="vessel fx">
-      <div class="vessel-img" data-cap="Viking 58 · the cockpit"><i style="background-image:var(--img-viking)"></i></div>
+      <div class="vessel-img" data-cap="Viking 58 · the cockpit"><i style="background-image:var(--img-viking)"></i><video class="vessel-video" data-fleet="viking" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
       <div>
         <span class="vessel-role">Offshore · Sportfish</span>
         <h3>Viking 58 Convertible</h3>
@@ -570,7 +578,7 @@ em{font-style:italic;color:var(--flats)}
     </article>
 
     <article class="vessel fx">
-      <div class="vessel-img" data-cap="Midnight Express 43 · running east"><i style="background-image:var(--img-midnight)"></i></div>
+      <div class="vessel-img" data-cap="Midnight Express 43 · running east"><i style="background-image:var(--img-midnight)"></i><video class="vessel-video" data-fleet="midnight" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
       <div>
         <span class="vessel-role">Crossing · Cruising · Snorkel</span>
         <h3>Midnight Express 43</h3>
@@ -587,7 +595,7 @@ em{font-style:italic;color:var(--flats)}
     </article>
 
     <article class="vessel fx">
-      <div class="vessel-img" data-cap="Three skis · house dock"><i style="background-image:var(--img-skis)"></i></div>
+      <div class="vessel-img" data-cap="Three skis · house dock"><i style="background-image:var(--img-skis)"></i><video class="vessel-video" data-fleet="skis" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video></div>
       <div>
         <span class="vessel-role">Flats · Free time</span>
         <h3>The WaveRunners</h3>
@@ -886,15 +894,18 @@ em{font-style:italic;color:var(--flats)}
   /* Plate videos. Lazy — nothing downloads until the plate is close to view. */
   try{
     var pcfg = window.DUE_EAST_PLATES || {};
-    var plates = document.querySelectorAll('.plate-video, .band-video');
+    var plates = document.querySelectorAll('.plate-video, .band-video, .vessel-video');
     if(plates.length && !reduce && !thrifty && 'IntersectionObserver' in window){
       var po = new IntersectionObserver(function(es){
         es.forEach(function(e){
           var pv = e.target;
           if(!e.isIntersecting){ pv.pause(); return; }
           if(!pv.dataset.loaded){
-            var key = pv.getAttribute('data-plate') || pv.getAttribute('data-band');
-            var src = (pv.classList.contains('band-video') ? (window.DUE_EAST_SECTION||{}) : pcfg)[key];
+            var key = pv.getAttribute('data-plate') || pv.getAttribute('data-band') || pv.getAttribute('data-fleet');
+            var bag = pv.classList.contains('band-video')   ? (window.DUE_EAST_SECTION||{})
+                    : pv.classList.contains('vessel-video') ? (window.DUE_EAST_FLEET||{})
+                    : pcfg;
+            var src = bag[key];
             if(!src){ po.unobserve(pv); return; }
             pv.dataset.loaded = '1';
             var so = document.createElement('source');
