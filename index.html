@@ -97,10 +97,10 @@ em{font-style:italic;color:var(--flats)}
 .nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
 .nav.is-stuck{padding-top:calc(11px + env(safe-area-inset-top));padding-bottom:11px;
   background:rgba(3,17,31,.9);backdrop-filter:blur(14px);border-bottom-color:var(--rule)}
-.mark{font-family:var(--display);font-size:21px;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
+.mark{font-family:var(--display);font-size:24px;letter-spacing:.06em;text-decoration:none;white-space:nowrap}
 .mark span{color:var(--flats)}
-.nav-links{display:flex;gap:36px;justify-content:center}
-.nav-links a{font-family:var(--mono);font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;
+.nav-links{display:flex;gap:40px;justify-content:center}
+.nav-links a{font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;
   text-decoration:none;color:var(--ink-soft);position:relative;padding-bottom:4px;transition:color .4s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--flats);
   transform:scaleX(0);transform-origin:right;transition:transform .55s var(--ease)}
@@ -108,7 +108,7 @@ em{font-style:italic;color:var(--flats)}
 .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;
-  font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;
   text-decoration:none;padding:13px 24px;border:1px solid rgba(201,154,63,.55);color:var(--brass);
   background:transparent;cursor:pointer;
   transition:background .4s var(--ease),color .4s var(--ease),border-color .4s}
@@ -447,9 +447,9 @@ em{font-style:italic;color:var(--flats)}
       <title>Depth profile, read downward: Palm Beach Inlet, the Gulf Stream at 2,000 ft, the wall, the Sapona wreck, and the Bimini sandbar</title>
       <defs>
         <linearGradient id="waterV" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".16"/>
-          <stop offset="45%" stop-color="#0E62B4" stop-opacity=".40"/>
-          <stop offset="100%" stop-color="#08417C" stop-opacity=".10"/>
+          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".22"/>
+          <stop offset="42%" stop-color="#0E62B4" stop-opacity=".40"/>
+          <stop offset="100%" stop-color="#08417C" stop-opacity=".14"/>
         </linearGradient>
       </defs>
       <text class="scale-tag" x="30" y="14" text-anchor="middle">0</text>
@@ -457,7 +457,7 @@ em{font-style:italic;color:var(--flats)}
       <line class="surface" x1="30" y1="24" x2="306" y2="24"/>
       <line class="tick" x1="30" y1="20" x2="30" y2="28"/>
       <line class="tick" x1="306" y1="20" x2="306" y2="28"/>
-      <path fill="url(#waterV)" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616 L30,616 L30,44 Z"/>
+      <path fill="url(#waterV)" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616 L340,616 L340,44 Z"/>
       <path class="floor-line" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616"/>
       <g class="pin">
         <circle class="pin-dot" cx="44" cy="44" r="4"/>
