@@ -170,8 +170,13 @@ em{font-style:italic;color:var(--flats)}
     linear-gradient(180deg,#0A4C86 0%,#063356 38%,#03111F 84%)}
 .hero-bg{position:absolute;inset:0;z-index:0;background-image:var(--img-hero);background-size:cover;background-position:center}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;
-  opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
+  opacity:0;transition:opacity 1.4s var(--ease)}
 .hero-video.on{opacity:1}
+/* With real footage underneath, the decorative light fields have to back off
+   or they wash it out. Text contrast is held by the veil instead. */
+.hero.has-video .caustic{opacity:.16;transition:opacity 1.4s var(--ease)}
+.hero.has-video .hero-veil{
+  background:linear-gradient(180deg,rgba(3,17,31,.58) 0%,rgba(3,17,31,.30) 30%,rgba(3,17,31,.82) 78%,#03111F 100%)}
 .hero-veil{position:absolute;inset:0;z-index:1;
   background:linear-gradient(180deg,rgba(3,17,31,.5) 0%,rgba(3,17,31,.12) 32%,rgba(3,17,31,.86) 82%,#03111F 100%)}
 .caustic{position:absolute;inset:-20%;z-index:1;pointer-events:none;filter:blur(60px);opacity:.5}
@@ -821,8 +826,15 @@ em{font-style:italic;color:var(--flats)}
       sm.src = cfg.mp4; sm.type = 'video/mp4';
       v.appendChild(sm);
 
-      v.addEventListener('playing', function(){ v.classList.add('on'); });
-      v.addEventListener('error', function(){ v.classList.remove('on'); });
+      var heroEl = document.getElementById('top');
+      v.addEventListener('playing', function(){
+        v.classList.add('on');
+        if(heroEl) heroEl.classList.add('has-video');
+      });
+      v.addEventListener('error', function(){
+        v.classList.remove('on');
+        if(heroEl) heroEl.classList.remove('has-video');
+      });
 
       v.load();
       var attempt = v.play();
