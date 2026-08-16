@@ -211,7 +211,7 @@ em{font-style:italic;color:var(--flats)}
 /* ── charts ── */
 .chart-hold{position:relative;z-index:3;width:100%}
 .chart{display:block;width:100%;height:auto}
-.chart-v{display:none;max-width:420px;margin:0 auto;padding:0 var(--pad) 44px}
+.chart-v{display:none;width:100%;padding:0 0 20px}
 @media(max-width:940px){
   .chart-h{display:none}
   .chart-v{display:block}
@@ -443,46 +443,45 @@ em{font-style:italic;color:var(--flats)}
     </svg>
 
     <!-- vertical profile — phones -->
-    <svg class="chart chart-v" viewBox="0 0 340 660" role="img" xmlns="http://www.w3.org/2000/svg">
-      <title>Depth profile, read downward: Palm Beach Inlet, the Gulf Stream at 2,000 ft, the wall, the Sapona wreck, and the Bimini sandbar</title>
+    <svg class="chart chart-v" viewBox="0 0 380 300" role="img" xmlns="http://www.w3.org/2000/svg">
+      <title>Depth profile: Palm Beach Inlet east across the Gulf Stream to the Bimini flats</title>
       <defs>
-        <linearGradient id="waterV" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".22"/>
-          <stop offset="42%" stop-color="#0E62B4" stop-opacity=".40"/>
-          <stop offset="100%" stop-color="#08417C" stop-opacity=".14"/>
+        <linearGradient id="waterV" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#5AC6DA" stop-opacity=".18"/>
+          <stop offset="38%" stop-color="#0E62B4" stop-opacity=".42"/>
+          <stop offset="78%" stop-color="#08417C" stop-opacity=".24"/>
+          <stop offset="100%" stop-color="#03111F" stop-opacity="0"/>
         </linearGradient>
       </defs>
-      <text class="scale-tag" x="30" y="14" text-anchor="middle">0</text>
-      <text class="scale-tag" x="306" y="14" text-anchor="end">2,000 FT</text>
-      <line class="surface" x1="30" y1="24" x2="306" y2="24"/>
-      <line class="tick" x1="30" y1="20" x2="30" y2="28"/>
-      <line class="tick" x1="306" y1="20" x2="306" y2="28"/>
-      <path fill="url(#waterV)" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616 L340,616 L340,44 Z"/>
-      <path class="floor-line" d="M44,44 C52,66 56,76 72,88 C124,120 214,132 264,154 C294,167 306,174 306,196 L306,352 C306,382 292,398 262,412 C210,434 168,446 140,466 C112,486 100,506 92,528 C80,558 62,586 46,616"/>
+      <text class="scale-tag" x="2" y="14">0 NM</text>
+      <text class="scale-tag" x="378" y="14" text-anchor="end">74 NM</text>
+      <line class="surface" x1="0" y1="26" x2="380" y2="26"/>
+
+      <path fill="url(#waterV)" d="M0,39 L17,45 L29,59 C40,90 50,180 63,240 C70,272 77,279 87,283 L205,284 C217,282 223,255 229,197 C234,153 240,126 251,114 C272,105 293,98 316,85 C331,76 345,63 360,53 L380,42 L380,300 L0,300 Z"/>
+      <path class="floor-line" d="M0,39 L17,45 L29,59 C40,90 50,180 63,240 C70,272 77,279 87,283 L205,284 C217,282 223,255 229,197 C234,153 240,126 251,114 C272,105 293,98 316,85 C331,76 345,63 360,53 L380,42"/>
+
       <g class="pin">
-        <circle class="pin-dot" cx="44" cy="44" r="4"/>
-        <text class="pin-label" x="62" y="40">Palm Beach Inlet</text>
-        <text class="pin-depth" x="62" y="57">DEPART · 0 NM</text>
+        <circle class="pin-dot" cx="6" cy="40" r="3.5"/>
+        <text class="pin-label" x="10" y="66">Palm Beach Inlet</text>
+        <text class="pin-depth" x="10" y="80">DEPART 07:00</text>
       </g>
       <g class="pin">
-        <circle class="pin-dot" cx="306" cy="250" r="4"/>
-        <text class="pin-label" x="288" y="245" text-anchor="end">Gulf Stream</text>
-        <text class="pin-depth" x="288" y="262" text-anchor="end">2,000 FT</text>
+        <circle class="pin-dot" cx="140" cy="284" r="3.5"/>
+        <text class="pin-label" x="140" y="262" text-anchor="middle">Gulf Stream</text>
+        <text class="pin-depth" x="140" y="276" text-anchor="middle">2,000 FT</text>
       </g>
       <g class="pin">
-        <circle class="pin-dot" cx="196" cy="437" r="4"/>
-        <text class="pin-label" x="214" y="433">The wall</text>
-        <text class="pin-depth" x="214" y="450">600 FT</text>
+        <circle class="pin-dot" cx="227" cy="220" r="3.5"/>
+        <text class="pin-label" x="237" y="216">The wall</text>
+        <text class="pin-depth" x="237" y="230">600 FT</text>
       </g>
       <g class="pin">
-        <circle class="pin-dot" cx="92" cy="528" r="4"/>
-        <text class="pin-label" x="110" y="524">Sapona wreck</text>
-        <text class="pin-depth" x="110" y="541">15 FT</text>
+        <circle class="pin-dot" cx="316" cy="85" r="3.5"/>
       </g>
       <g class="pin">
-        <circle class="pin-dot" cx="46" cy="616" r="4"/>
-        <text class="pin-label" x="64" y="612">The sandbar</text>
-        <text class="pin-depth" x="64" y="629">2 FT · 74 NM</text>
+        <circle class="pin-dot" cx="371" cy="45" r="3.5"/>
+        <text class="pin-label" x="370" y="70" text-anchor="end">The sandbar</text>
+        <text class="pin-depth" x="370" y="84" text-anchor="end">2 FT</text>
       </g>
     </svg>
   </div>
