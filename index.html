@@ -12,6 +12,10 @@
    Leave the strings empty and the gradient hero stays exactly
    as it looks now. Nothing loads on phones or slow connections.
    ═══════════════════════════════════════════════════════════ */
+window.DUE_EAST_PLATES = {
+  sandbar: "",   /* e.g. "banks.mp4"  — the flats plate, after The Crossing */
+  chef:    ""    /* e.g. "rawbar.mp4" — the plate after A Day              */
+};
 window.DUE_EAST_HERO = {
   mp4:    "crossing.mp4",   /* sits next to index.html in the repo root */
   webm:   "",   /* optional, smaller; leave blank if you only have the mp4     */
@@ -239,6 +243,9 @@ em{font-style:italic;color:var(--flats)}
 .plate{position:relative;height:clamp(260px,52vh,620px);overflow:hidden;
   background:linear-gradient(120deg,#063356,#0E62B4 45%,#03111F)}
 .plate-img{position:absolute;inset:0;background-size:cover;background-position:center}
+.plate-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
+.plate-video.on{opacity:1}
 .plate-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,17,31,.32),rgba(3,17,31,.7))}
 .plate-cap{position:absolute;left:var(--pad);bottom:26px;font-family:var(--mono);font-size:10px;letter-spacing:.24em;color:rgba(242,235,222,.62);text-transform:uppercase}
 
@@ -517,8 +524,9 @@ em{font-style:italic;color:var(--flats)}
 
 <div class="plate">
   <div class="plate-img" style="background-image:var(--img-sandbar)"></div>
+  <video class="plate-video" data-plate="sandbar" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <div class="plate-veil"></div>
-  <div class="plate-cap">Low tide · the flat · 15:30</div>
+  <div class="plate-cap">The Bimini banks · two feet of water</div>
 </div>
 
 <!-- FLEET -->
@@ -656,6 +664,7 @@ em{font-style:italic;color:var(--flats)}
 
 <div class="plate">
   <div class="plate-img" style="background-image:var(--img-chef)"></div>
+  <video class="plate-video" data-plate="chef" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
   <div class="plate-veil"></div>
   <div class="plate-cap">Raw bar · swim platform · 18:40</div>
 </div>
@@ -858,6 +867,33 @@ em{font-style:italic;color:var(--flats)}
         },{threshold:.01});
         vo.observe(v);
       }
+    }
+  }catch(e){}
+
+  /* Plate videos. Lazy — nothing downloads until the plate is close to view. */
+  try{
+    var pcfg = window.DUE_EAST_PLATES || {};
+    var plates = document.querySelectorAll('.plate-video');
+    if(plates.length && !reduce && !thrifty && 'IntersectionObserver' in window){
+      var po = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          var pv = e.target;
+          if(!e.isIntersecting){ pv.pause(); return; }
+          if(!pv.dataset.loaded){
+            var src = pcfg[pv.getAttribute('data-plate')];
+            if(!src){ po.unobserve(pv); return; }
+            pv.dataset.loaded = '1';
+            var so = document.createElement('source');
+            so.src = src; so.type = 'video/mp4';
+            pv.appendChild(so);
+            pv.addEventListener('playing', function(){ pv.classList.add('on'); });
+            pv.addEventListener('error', function(){ pv.classList.remove('on'); });
+            pv.load();
+          }
+          var a = pv.play(); if(a && a.catch) a.catch(function(){});
+        });
+      },{rootMargin:'300px 0px'});
+      plates.forEach(function(pv){ po.observe(pv); });
     }
   }catch(e){}
 
