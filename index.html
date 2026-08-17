@@ -259,8 +259,7 @@ em{font-style:italic;color:var(--flats)}
 .plate{position:relative;height:clamp(260px,52vh,620px);overflow:hidden;
   background:linear-gradient(120deg,#063356,#0E62B4 45%,#03111F)}
 .plate-img{position:absolute;inset:0;background-size:cover;background-position:center}
-.plate-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;
+.plate-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
 .plate-video.on{opacity:1}
 .plate-veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(3,17,31,.32),rgba(3,17,31,.7))}
@@ -274,8 +273,7 @@ em{font-style:italic;color:var(--flats)}
 .vessel-img{position:relative;aspect-ratio:4/5;overflow:hidden;background:linear-gradient(150deg,#0A4C86,#03111F)}
 @media(max-width:899px){.vessel-img{aspect-ratio:4/3}}
 .vessel-img i{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform 1.4s var(--ease)}
-.vessel-video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  min-width:100%;min-height:100%;width:auto;height:auto;object-fit:cover;
+.vessel-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   opacity:0;transition:opacity 1.4s var(--ease);pointer-events:none}
 .vessel-video.on{opacity:1}
 @media(hover:hover){.vessel:hover .vessel-img i{transform:scale(1)}}
